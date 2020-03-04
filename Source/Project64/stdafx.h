@@ -15,6 +15,10 @@
 
 #pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
+// needed because windows.h includes winsock.h
+// while winsock2.h is being used by the codebase,
+// so prevent windows.h from including winsock.h
+#define _WINSOCKAPI_
 #include <Common/MemTest.h>
 #include <Common/CriticalSection.h>
 #include <Project64-core/Multilanguage.h>
@@ -22,7 +26,7 @@
 #include "N64System.h"
 #include <Project64-core/Plugin.h>
 #include "Support.h"
-#include <Project64-core/Version.h>
+#include "../Project64-core/Version.h"
 #include <windows.h>
 #include <mmsystem.h>
 #include <Aclapi.h>
