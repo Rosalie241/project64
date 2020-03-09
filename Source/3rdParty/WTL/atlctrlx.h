@@ -340,7 +340,7 @@ public:
 		}
 		else
 		{
-			CPaintDC dc(m_hWnd);
+			CPaintDC dc(this->m_hWnd);
 			pT->DoPaint(dc.m_hDC);
 		}
 		return 0;
@@ -1078,7 +1078,7 @@ public:
 		bool bRet = true;
 		if(IsNotifyButton())
 		{
-			NMHDR nmhdr = { m_hWnd, GetDlgCtrlID(), NM_CLICK };
+			NMHDR nmhdr = { m_hWnd, (UINT_PTR)GetDlgCtrlID(), NM_CLICK };
 			::SendMessage(GetParent(), WM_NOTIFY, GetDlgCtrlID(), (LPARAM)&nmhdr);
 		}
 		else if(IsCommandButton())
@@ -1224,7 +1224,7 @@ public:
 		}
 		else
 		{
-			CPaintDC dc(m_hWnd);
+			CPaintDC dc(this->m_hWnd);
 			pT->DoEraseBackground(dc.m_hDC);
 			pT->DoPaint(dc.m_hDC);
 		}
@@ -1544,7 +1544,7 @@ public:
 		if(m_lpstrLabel == NULL && m_lpstrHyperLink == NULL)
 			return false;
 
-		CClientDC dc(m_hWnd);
+		CClientDC dc(this->m_hWnd);
 		RECT rcClient = { 0 };
 		GetClientRect(&rcClient);
 		m_rcLink = rcClient;
@@ -4885,7 +4885,7 @@ public:
 		ATLASSERT(m_ilDrag.m_hImageList == NULL);
 		m_ilDrag.Create(rcItem.right - rcItem.left, rcItem.bottom - rcItem.top, ILC_COLORDDB | ILC_MASK, 1, 1);
 
-		CClientDC dc(m_hWnd);
+		CClientDC dc(this->m_hWnd);
 		CDC dcMem;
 		dcMem.CreateCompatibleDC(dc);
 		ATLASSERT(dcMem.m_hDC != NULL);

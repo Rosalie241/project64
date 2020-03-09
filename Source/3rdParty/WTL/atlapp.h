@@ -1638,6 +1638,7 @@ public:
 	}
 
 // COM Server methods
+	/* Does removing this break anything?
 	LONG Unlock()
 	{
 		LONG lRet = CComModule::Unlock();
@@ -1647,7 +1648,7 @@ public:
 			::SetEvent(m_hEventShutdown); // tell monitor that we transitioned to zero
 		}
 		return lRet;
-	}
+	} */
 
 	void MonitorShutdown()
 	{

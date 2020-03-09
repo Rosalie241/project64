@@ -100,7 +100,13 @@ void CSettingTypeRDBSaveChip::Save (uint32_t /*Index*/, uint32_t Value )
 {
     switch (Value)
     {
+        // SaveChip_Auto is -1
+        // we're checking against a uint, that's impossible?
+        // or does msvc do something special here?
+        // use only for msvc for now
+#ifdef _MSC_VER
     case SaveChip_Auto:       m_SettingsIniFile->SaveString(m_SectionIdent->c_str(),m_KeyName.c_str(),"First Save Type"); break;
+#endif // _MSC_VER
     case SaveChip_Eeprom_4K:  m_SettingsIniFile->SaveString(m_SectionIdent->c_str(),m_KeyName.c_str(),"4kbit Eeprom"); break;
     case SaveChip_Eeprom_16K: m_SettingsIniFile->SaveString(m_SectionIdent->c_str(),m_KeyName.c_str(),"16kbit Eeprom"); break;
     case SaveChip_Sram:       m_SettingsIniFile->SaveString(m_SectionIdent->c_str(),m_KeyName.c_str(),"Sram"); break;

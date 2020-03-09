@@ -158,7 +158,7 @@ void RemoveAllBpoint ( void )
 	NoOfBpoints = 0;
 }
 
-void RemoveBpoint ( HWND hList, int index )
+void RemoveBpoint ( void * hList, int index )
 {
 	LRESULT response;
 	uint32_t location;

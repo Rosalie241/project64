@@ -883,7 +883,7 @@ bool CreateEffectHandle( HWND hWnd, LPDIRECTINPUTDEVICE8 lpDirectInputDevice, LP
         return false;
 
     DWORD nAxes = 0;
-    DWORD rgdwAxes[] = { DIJOFS_X, DIJOFS_Y };
+    DWORD rgdwAxes[] = { (DWORD)DIJOFS_X, (DWORD)DIJOFS_Y };
 
     HRESULT hResult;
 

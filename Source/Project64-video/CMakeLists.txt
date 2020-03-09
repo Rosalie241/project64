@@ -65,3 +65,4 @@ add_library(Project64-video SHARED
 )
 
 target_link_libraries(Project64-video png zlib Common Settings)
+target_compile_definitions(Project64-video PRIVATE __MSC__)

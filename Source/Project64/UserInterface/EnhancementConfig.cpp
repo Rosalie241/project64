@@ -392,7 +392,7 @@ void CEnhancementConfig::AddCodeLayers(int index, const std::string & Name, HTRE
 	char Text[500], Item[500];
 	if (Name.length() > (sizeof(Text) - 5)) { g_Notify->BreakPoint(__FILE__, __LINE__); }
 	strcpy(Text, Name.c_str());
-	if (strchr(Text, '\\') > 0) { *strchr(Text, '\\') = 0; }
+	if ((int)strchr(Text, '\\') > 0) { *strchr(Text, '\\') = 0; }
 
 	//See if text is already added
 	tv.item.mask = TVIF_TEXT;

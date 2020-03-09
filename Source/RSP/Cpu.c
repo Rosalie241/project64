@@ -194,7 +194,7 @@ DWORD RunRecompilerCPU (DWORD Cycles);
 
 #define MI_INTR_SP				0x01		/* Bit 0: SP intr */
 
-__declspec(dllexport) DWORD DoRspCycles ( DWORD Cycles )
+EXPORT uint32_t DoRspCycles ( uint32_t Cycles )
 {
     extern Boolean AudioHle, GraphicsHle;
 	DWORD TaskType = *(DWORD*)(RSPInfo.DMEM + 0xFC0);

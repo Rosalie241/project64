@@ -1674,9 +1674,15 @@ void CHexEditCtrl::UpdateLayoutInfo(void)
     int columnsTop = 0 + headerHeight;
     int columnsBottom = columnsTop + m_NumVisibleRows * m_CharHeight;
 
+#ifdef _MSC_VER // msvc is being special like usual
     m_AddressColumnRect = { addressColumnLeft, columnsTop, addressColumnRight, columnsBottom };
     m_HexDataColumnRect = { hexDataColumnLeft, columnsTop, hexDataColumnRight, columnsBottom };
     m_AsciiColumnRect = { asciiColumnLeft, columnsTop, asciiColumnRight, columnsBottom };
+#else
+    m_AddressColumnRect = (CRect){ addressColumnLeft, columnsTop, addressColumnRight, columnsBottom };
+    m_HexDataColumnRect = (CRect){ hexDataColumnLeft, columnsTop, hexDataColumnRight, columnsBottom };
+    m_AsciiColumnRect = (CRect){ asciiColumnLeft, columnsTop, asciiColumnRight, columnsBottom };
+#endif // _MSC_VER
 
     m_bLayoutChanged = true;
 }

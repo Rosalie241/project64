@@ -22,7 +22,7 @@
 static void calc_point_light(gfxVERTEX & v, float * vpos)
 {
     float light_intensity = 0.0f;
-    register float color[3] = { rdp.light[rdp.num_lights].r, rdp.light[rdp.num_lights].g, rdp.light[rdp.num_lights].b };
+    float color[3] = { rdp.light[rdp.num_lights].r, rdp.light[rdp.num_lights].g, rdp.light[rdp.num_lights].b };
     for (uint32_t l = 0; l < rdp.num_lights; l++)
     {
         if (rdp.light[l].nonblack)

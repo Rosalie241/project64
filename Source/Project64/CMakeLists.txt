@@ -67,6 +67,7 @@ add_executable(Project64 WIN32
     "UserInterface/WTLControls/ModifiedEditBox.cpp"
     "UserInterface/WTLControls/PartialGroupBox.cpp"
     "UserInterface/UIResources.rc"
+    "Project64.exe.manifest"
     "../Project64-core/Version.h"
 )
 

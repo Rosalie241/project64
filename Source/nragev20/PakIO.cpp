@@ -1430,7 +1430,7 @@ BYTE AddressCRC( const unsigned char * Address )
 {
     bool HighBit;
     WORD Data = MAKEWORD( Address[1], Address[0] );
-    register BYTE Remainder = ( Data >> 11 ) & 0x1F;
+    BYTE Remainder = ( Data >> 11 ) & 0x1F;
 
     BYTE bBit = 5;
 
@@ -1450,7 +1450,7 @@ BYTE AddressCRC( const unsigned char * Address )
 
 BYTE DataCRC( const unsigned char * Data, const int iLength )
 {
-    register BYTE Remainder = Data[0];
+    BYTE Remainder = Data[0];
 
     int iByte = 1;
     BYTE bBit = 0;

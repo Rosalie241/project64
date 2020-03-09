@@ -7,6 +7,9 @@ project(Project64)
 # add current directory & binary directory
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+# Require C++17
+set(CMAKE_CXX_STANDARD 17)
+
 # Global include directories
 include_directories(Source/ Source/3rdParty Source/3rdParty/directx/include)
 
@@ -17,8 +20,6 @@ execute_process(
     OUTPUT_VARIABLE GIT_DESCRIBE_VERSION
     OUTPUT_STRIP_TRAILING_WHITESPACE
 )
-
-add_definitions(-D__MSC__)
 
 add_subdirectory(Source/3rdParty/7zip)
 add_subdirectory(Source/3rdParty/duktape)
@@ -39,7 +40,8 @@ macro(GENERATE_VERSION_H)
 endmacro()
 
 add_subdirectory(Source/Project64-core)
-add_subdirectory(Source/Project64)
+#add_subdirectory(Source/Project64)
+add_subdirectory(Source/Project64-qt)
 
 # Plugins
 add_subdirectory(Source/Project64-video)

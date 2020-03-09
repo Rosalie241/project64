@@ -32,7 +32,7 @@ int main()
     }
     InFile.SeekToBegin();
     uint32_t FileLen = InFile.GetLength();
-    std::auto_ptr<uint8_t> InputData(new uint8_t[FileLen]);
+    std::unique_ptr<uint8_t> InputData(new uint8_t[FileLen]);
     InFile.Read(InputData.get(), FileLen);
     strvector VersionData = stdstr(std::string((char *)InputData.get(), FileLen)).Tokenize("\n");
 

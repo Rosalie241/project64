@@ -69,12 +69,6 @@ RomInformation::~RomInformation()
 }
 
 #include <windows.h>
-void RomInformation::DisplayInformation(HWND hParent) const
-{
-    if (m_FileName.length() == 0) { return; }
-
-    DialogBoxParamW(GetModuleHandle(NULL), MAKEINTRESOURCEW(IDD_Rom_Information), hParent, (DLGPROC)RomInfoProc, (DWORD)this);
-}
 
 DWORD CALLBACK RomInfoProc(HWND hDlg, DWORD uMsg, DWORD wParam, DWORD lParam)
 {
@@ -252,4 +246,11 @@ DWORD CALLBACK RomInfoProc(HWND hDlg, DWORD uMsg, DWORD wParam, DWORD lParam)
         return false;
     }
     return true;
+}
+
+void RomInformation::DisplayInformation(HWND hParent) const
+{
+    if (m_FileName.length() == 0) { return; }
+
+    DialogBoxParamW(GetModuleHandle(NULL), MAKEINTRESOURCEW(IDD_Rom_Information), hParent, (DLGPROC)RomInfoProc, (DWORD)this);
 }

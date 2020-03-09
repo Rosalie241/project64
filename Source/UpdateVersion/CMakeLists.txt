@@ -2,7 +2,7 @@
 # UpdateVersion CMakeLists.txt
 #
 
-add_executable(UpdateVersion 
+add_executable(UpdateVersion
     "UpdateVersion.cpp"
 )
 

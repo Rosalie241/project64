@@ -24,66 +24,6 @@ LRESULT CALLBACK MainGui_Proc(HWND WndHandle, DWORD uMsg, DWORD wParam, DWORD lP
 
 extern BOOL set_about_field(HWND hDlg, int nIDDlgItem, const wchar_t * config_string, const wchar_t * language_string);
 
-CMainGui::CMainGui(bool bMainWindow, const char * WindowTitle) :
-    CRomBrowser(m_hMainWindow, m_hStatusWnd),
-    m_ThreadId(GetCurrentThreadId()),
-    m_bMainWindow(bMainWindow),
-    m_Created(false),
-    m_AttachingMenu(false),
-    m_MakingVisible(false),
-    m_ResetPlugins(false),
-    m_ResetInfo(NULL)
-{
-    m_Menu = NULL;
-
-    m_hMainWindow = 0;
-    m_hStatusWnd = 0;
-    m_SaveMainWindowPos = false;
-    m_SaveMainWindowTop = 0;
-    m_SaveMainWindowLeft = 0;
-
-    m_SaveRomBrowserPos = false;
-    m_SaveRomBrowserTop = 0;
-    m_SaveRomBrowserLeft = 0;
-
-    if (m_bMainWindow)
-    {
-        g_Settings->RegisterChangeCB((SettingID)(FirstUISettings + RomBrowser_Enabled), this, (CSettings::SettingChangedFunc)RomBowserEnabledChanged);
-        g_Settings->RegisterChangeCB((SettingID)(FirstUISettings + RomBrowser_ColoumnsChanged), this, (CSettings::SettingChangedFunc)RomBowserColoumnsChanged);
-        g_Settings->RegisterChangeCB(RomList_GameDirRecursive, this, (CSettings::SettingChangedFunc)RomBrowserListChanged);
-        g_Settings->RegisterChangeCB(RomList_ShowFileExtensions, this, (CSettings::SettingChangedFunc)RomBrowserListChanged);
-        g_Settings->RegisterChangeCB(GameRunning_LoadingInProgress, this, (CSettings::SettingChangedFunc)LoadingInProgressChanged);
-        g_Settings->RegisterChangeCB(GameRunning_CPU_Running, this, (CSettings::SettingChangedFunc)GameCpuRunning);
-        g_Settings->RegisterChangeCB(GameRunning_CPU_Paused, this, (CSettings::SettingChangedFunc)GamePaused);
-        g_Settings->RegisterChangeCB(Game_File, this, (CSettings::SettingChangedFunc)GameLoaded);
-    }
-
-    //if this fails then it has already been created
-    RegisterWinClass();
-    Create(WindowTitle);
-}
-
-CMainGui::~CMainGui(void)
-{
-    WriteTrace(TraceUserInterface, TraceDebug, "Start");
-    if (m_bMainWindow)
-    {
-        g_Settings->UnregisterChangeCB((SettingID)(FirstUISettings + RomBrowser_Enabled), this, (CSettings::SettingChangedFunc)RomBowserEnabledChanged);
-        g_Settings->UnregisterChangeCB((SettingID)(FirstUISettings + RomBrowser_ColoumnsChanged), this, (CSettings::SettingChangedFunc)RomBowserColoumnsChanged);
-        g_Settings->UnregisterChangeCB(RomList_GameDirRecursive, this, (CSettings::SettingChangedFunc)RomBrowserListChanged);
-        g_Settings->UnregisterChangeCB(RomList_ShowFileExtensions, this, (CSettings::SettingChangedFunc)RomBrowserListChanged);
-        g_Settings->UnregisterChangeCB(GameRunning_LoadingInProgress, this, (CSettings::SettingChangedFunc)LoadingInProgressChanged);
-        g_Settings->UnregisterChangeCB(GameRunning_CPU_Running, this, (CSettings::SettingChangedFunc)GameCpuRunning);
-        g_Settings->UnregisterChangeCB(GameRunning_CPU_Paused, this, (CSettings::SettingChangedFunc)GamePaused);
-        g_Settings->UnregisterChangeCB(Game_File, this, (CSettings::SettingChangedFunc)GameLoaded);
-    }
-    if (m_hMainWindow)
-    {
-        DestroyWindow(m_hMainWindow);
-    }
-    WriteTrace(TraceUserInterface, TraceDebug, "Done");
-}
-
 bool CMainGui::RegisterWinClass(void)
 {
     stdstr_f VersionDisplay("Project64 %s", VER_FILE_VERSION_STR);
@@ -284,11 +224,6 @@ void * CMainGui::GetModuleInstance(void) const
 void CMainGui::AboutBox(void)
 {
     DialogBoxParamW(GetModuleHandle(NULL), MAKEINTRESOURCEW(IDD_About), m_hMainWindow, (DLGPROC)AboutBoxProc, (LPARAM)this);
-}
-
-void CMainGui::AboutIniBox(void)
-{
-    DialogBoxParamW(GetModuleHandle(NULL), MAKEINTRESOURCEW(IDD_About_Ini), m_hMainWindow, (DLGPROC)AboutIniBoxProc, (LPARAM)this);
 }
 
 DWORD CALLBACK AboutIniBoxProc(HWND hDlg, DWORD uMsg, DWORD wParam, DWORD /*lParam*/)
@@ -1322,4 +1257,69 @@ BOOL set_about_field(HWND hDlg, int nIDDlgItem, const wchar_t * config_string, c
 
     swprintf(temp_string, sizeof(temp_string) / sizeof(temp_string[0]), L"%s: %s", config_string, language_string);
     return SetDlgItemTextW(hDlg, nIDDlgItem, temp_string);
+}
+
+CMainGui::CMainGui(bool bMainWindow, const char * WindowTitle) :
+    CRomBrowser(m_hMainWindow, m_hStatusWnd),
+    m_ThreadId(GetCurrentThreadId()),
+    m_bMainWindow(bMainWindow),
+    m_Created(false),
+    m_AttachingMenu(false),
+    m_MakingVisible(false),
+    m_ResetPlugins(false),
+    m_ResetInfo(NULL)
+{
+    m_Menu = NULL;
+
+    m_hMainWindow = 0;
+    m_hStatusWnd = 0;
+    m_SaveMainWindowPos = false;
+    m_SaveMainWindowTop = 0;
+    m_SaveMainWindowLeft = 0;
+
+    m_SaveRomBrowserPos = false;
+    m_SaveRomBrowserTop = 0;
+    m_SaveRomBrowserLeft = 0;
+
+    if (m_bMainWindow)
+    {
+        g_Settings->RegisterChangeCB((SettingID)(FirstUISettings + RomBrowser_Enabled), this, (CSettings::SettingChangedFunc)RomBowserEnabledChanged);
+        g_Settings->RegisterChangeCB((SettingID)(FirstUISettings + RomBrowser_ColoumnsChanged), this, (CSettings::SettingChangedFunc)RomBowserColoumnsChanged);
+        g_Settings->RegisterChangeCB(RomList_GameDirRecursive, this, (CSettings::SettingChangedFunc)RomBrowserListChanged);
+        g_Settings->RegisterChangeCB(RomList_ShowFileExtensions, this, (CSettings::SettingChangedFunc)RomBrowserListChanged);
+        g_Settings->RegisterChangeCB(GameRunning_LoadingInProgress, this, (CSettings::SettingChangedFunc)LoadingInProgressChanged);
+        g_Settings->RegisterChangeCB(GameRunning_CPU_Running, this, (CSettings::SettingChangedFunc)GameCpuRunning);
+        g_Settings->RegisterChangeCB(GameRunning_CPU_Paused, this, (CSettings::SettingChangedFunc)GamePaused);
+        g_Settings->RegisterChangeCB(Game_File, this, (CSettings::SettingChangedFunc)GameLoaded);
+    }
+
+    //if this fails then it has already been created
+    RegisterWinClass();
+    Create(WindowTitle);
+}
+
+CMainGui::~CMainGui(void)
+{
+    WriteTrace(TraceUserInterface, TraceDebug, "Start");
+    if (m_bMainWindow)
+    {
+        g_Settings->UnregisterChangeCB((SettingID)(FirstUISettings + RomBrowser_Enabled), this, (CSettings::SettingChangedFunc)RomBowserEnabledChanged);
+        g_Settings->UnregisterChangeCB((SettingID)(FirstUISettings + RomBrowser_ColoumnsChanged), this, (CSettings::SettingChangedFunc)RomBowserColoumnsChanged);
+        g_Settings->UnregisterChangeCB(RomList_GameDirRecursive, this, (CSettings::SettingChangedFunc)RomBrowserListChanged);
+        g_Settings->UnregisterChangeCB(RomList_ShowFileExtensions, this, (CSettings::SettingChangedFunc)RomBrowserListChanged);
+        g_Settings->UnregisterChangeCB(GameRunning_LoadingInProgress, this, (CSettings::SettingChangedFunc)LoadingInProgressChanged);
+        g_Settings->UnregisterChangeCB(GameRunning_CPU_Running, this, (CSettings::SettingChangedFunc)GameCpuRunning);
+        g_Settings->UnregisterChangeCB(GameRunning_CPU_Paused, this, (CSettings::SettingChangedFunc)GamePaused);
+        g_Settings->UnregisterChangeCB(Game_File, this, (CSettings::SettingChangedFunc)GameLoaded);
+    }
+    if (m_hMainWindow)
+    {
+        DestroyWindow(m_hMainWindow);
+    }
+    WriteTrace(TraceUserInterface, TraceDebug, "Done");
+}
+
+void CMainGui::AboutIniBox(void)
+{
+    DialogBoxParamW(GetModuleHandle(NULL), MAKEINTRESOURCEW(IDD_About_Ini), m_hMainWindow, (DLGPROC)AboutIniBoxProc, (LPARAM)this);
 }

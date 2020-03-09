@@ -20,8 +20,11 @@ add_library(zlib STATIC
     "zutil.c"
     "contrib/minizip/ioapi.c"
     "contrib/minizip/iowin32.c"
-    "contrib/minizip/miniunz.c"
-    "contrib/minizip/minizip.c"
+# we don't need these
+# uncommented due to them containing 'main' functions
+# which confuses compilers
+#    "contrib/minizip/miniunz.c"
+#    "contrib/minizip/minizip.c"
     "contrib/minizip/mztools.c"
     "contrib/minizip/unzip.c"
     "contrib/minizip/zip.c"

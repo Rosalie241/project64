@@ -774,17 +774,17 @@ void CSettings::ReadGameSettings(const char * name)
     //frame buffer
     short fb_Settings[] =
     {
-        g_romopen ? Set_optimize_texrect : Set_optimize_texrect_default,
+        (short)(g_romopen ? Set_optimize_texrect : Set_optimize_texrect_default),
         Set_ignore_aux_copy,
         Set_hires_buf_clear,
         Set_fb_read_alpha,
         Set_useless_is_useless,
-        g_romopen ? Set_fb_smart : Set_fb_smart_default,
-        g_romopen ? Set_fb_hires : Set_fb_hires_default,
-        g_romopen ? Set_fb_read_always : Set_fb_read_always_default,
-        g_romopen ? Set_detect_cpu_write : Set_detect_cpu_write_default,
-        g_romopen ? Set_fb_get_info : Set_fb_get_info_default,
-        g_romopen ? Set_fb_render : Set_fb_render_default
+         (short)(g_romopen ? Set_fb_smart : Set_fb_smart_default),
+         (short)(g_romopen ? Set_fb_hires : Set_fb_hires_default),
+         (short)(g_romopen ? Set_fb_read_always : Set_fb_read_always_default),
+         (short)(g_romopen ? Set_detect_cpu_write : Set_detect_cpu_write_default),
+         (short)(g_romopen ? Set_fb_get_info : Set_fb_get_info_default),
+         (short)(g_romopen ? Set_fb_render : Set_fb_render_default)
     };
 
     fb_bits_t bits[] =

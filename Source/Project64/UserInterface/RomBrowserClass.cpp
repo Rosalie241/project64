@@ -1205,7 +1205,7 @@ void CRomBrowser::WatchRomDirChanged(CRomBrowser * _this)
     }
     catch (...)
     {
-        WriteTrace(TraceUserInterface, TraceError, __FUNCTION__ ":  Unhandled Exception");
+        WriteTrace(TraceUserInterface, TraceError, __FUNCTION__);
     }
 }
 

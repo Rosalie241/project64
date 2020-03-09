@@ -46,7 +46,7 @@ void CCheatsUI::AddCodeLayers(int CheatNumber, const stdstr &CheatName, HWND hPa
     char Text[500], Item[500];
     if (CheatName.length() > (sizeof(Text) - 5)) { g_Notify->BreakPoint(__FILE__, __LINE__); }
     strcpy(Text, CheatName.c_str());
-    if (strchr(Text, '\\') > 0) { *strchr(Text, '\\') = 0; }
+    if ((int)strchr(Text, '\\') > 0) { *strchr(Text, '\\') = 0; }
 
     //See if text is already added
     tv.item.mask = TVIF_TEXT;

@@ -1098,7 +1098,7 @@ public:
 	}
 
 // Implementation - IFileDialogEvents interface
-	virtual HRESULT STDMETHODCALLTYPE IFileDialogEvents::OnFileOk(IFileDialog* pfd)
+	virtual HRESULT STDMETHODCALLTYPE OnFileOk(IFileDialog* pfd)
 	{
 		T* pT = static_cast<T*>(this);
 		ATLASSERT(pT->m_spFileDlg.IsEqualObject(pfd));
@@ -1106,7 +1106,7 @@ public:
 		return pT->OnFileOk();
 	}
 
-	virtual HRESULT STDMETHODCALLTYPE IFileDialogEvents::OnFolderChanging(IFileDialog* pfd, IShellItem* psiFolder)
+	virtual HRESULT STDMETHODCALLTYPE OnFolderChanging(IFileDialog* pfd, IShellItem* psiFolder)
 	{
 		T* pT = static_cast<T*>(this);
 		ATLASSERT(pT->m_spFileDlg.IsEqualObject(pfd));
@@ -1114,7 +1114,7 @@ public:
 		return pT->OnFolderChanging(psiFolder);
 	}
 
-	virtual HRESULT STDMETHODCALLTYPE IFileDialogEvents::OnFolderChange(IFileDialog* pfd)
+	virtual HRESULT STDMETHODCALLTYPE OnFolderChange(IFileDialog* pfd)
 	{
 		T* pT = static_cast<T*>(this);
 		ATLASSERT(pT->m_spFileDlg.IsEqualObject(pfd));
@@ -1122,7 +1122,7 @@ public:
 		return pT->OnFolderChange();
 	}
 
-	virtual HRESULT STDMETHODCALLTYPE IFileDialogEvents::OnSelectionChange(IFileDialog* pfd)
+	virtual HRESULT STDMETHODCALLTYPE OnSelectionChange(IFileDialog* pfd)
 	{
 		T* pT = static_cast<T*>(this);
 		ATLASSERT(pT->m_spFileDlg.IsEqualObject(pfd));
@@ -1130,7 +1130,7 @@ public:
 		return pT->OnSelectionChange();
 	}
 
-	virtual HRESULT STDMETHODCALLTYPE IFileDialogEvents::OnShareViolation(IFileDialog* pfd, IShellItem* psi, FDE_SHAREVIOLATION_RESPONSE* pResponse)
+	virtual HRESULT STDMETHODCALLTYPE OnShareViolation(IFileDialog* pfd, IShellItem* psi, FDE_SHAREVIOLATION_RESPONSE* pResponse)
 	{
 		T* pT = static_cast<T*>(this);
 		ATLASSERT(pT->m_spFileDlg.IsEqualObject(pfd));
@@ -1138,7 +1138,7 @@ public:
 		return pT->OnShareViolation(psi, pResponse);
 	}
 
-	virtual HRESULT STDMETHODCALLTYPE IFileDialogEvents::OnTypeChange(IFileDialog* pfd)
+	virtual HRESULT STDMETHODCALLTYPE OnTypeChange(IFileDialog* pfd)
 	{
 		T* pT = static_cast<T*>(this);
 		ATLASSERT(pT->m_spFileDlg.IsEqualObject(pfd));
@@ -1146,7 +1146,7 @@ public:
 		return pT->OnTypeChange();
 	}
 
-	virtual HRESULT STDMETHODCALLTYPE IFileDialogEvents::OnOverwrite(IFileDialog* pfd, IShellItem* psi, FDE_OVERWRITE_RESPONSE* pResponse)
+	virtual HRESULT STDMETHODCALLTYPE OnOverwrite(IFileDialog* pfd, IShellItem* psi, FDE_OVERWRITE_RESPONSE* pResponse)
 	{
 		T* pT = static_cast<T*>(this);
 		ATLASSERT(pT->m_spFileDlg.IsEqualObject(pfd));
